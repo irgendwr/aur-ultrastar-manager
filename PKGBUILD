@@ -2,14 +2,14 @@
 # Contributor: Alexander Blinne
 
 pkgname=ultrastar-manager
-pkgver=r1211.7764a98
+pkgver=r1244.c2ba185
 pkgrel=1
 pkgdesc="Qt program used to manage USDX songs"
 url=https://github.com/UltraStar-Deluxe/UltraStar-Manager
 license=('GPL2')
 arch=('x86_64')
 
-depends=('qt6-base' 'qt6-multimedia' 'libmediainfo' 'taglib' 'cld2-git' 'pulseaudio-alsa')
+depends=('qt6-base' 'qt6-multimedia' 'libmediainfo' 'taglib' 'cld2-git' 'pulseaudio-alsa' 'libebur128')
 makedepends=('qt6-tools' 'git')
 
 source=('git+https://github.com/UltraStar-Deluxe/UltraStar-Manager.git')
@@ -24,15 +24,7 @@ pkgver() {
 build()
 {
 	cd "$srcdir/UltraStar-Manager"
-
-	cd src/plugins/audiotag && qmake6 audiotag.pro && make && cd ../../../
-	cd src/plugins/cleanup && qmake6 cleanup.pro && make && cd ../../../
-	cd src/plugins/lyric && qmake6 lyric.pro && make && cd ../../../
-	cd src/plugins/preparatory && qmake6 preparatory.pro && make && cd ../../../
-	cd src/plugins/rename && qmake6 rename.pro && make && cd ../../../
-
-	cd src
-	qmake6 UltraStar-Manager.pro
+	qmake6
 	make
 }
 
